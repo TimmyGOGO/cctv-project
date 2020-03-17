@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'; img-src * 'self' data: https:;"
+    />
+    <title>CCTV</title>
+  </head>
+  <body>
+    <img id="image" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script>
+      const socket = io.connect('http://localhost:3000')
+      socket.on('image', (image) => {
+        const imageEl = document.getElementById('image')
+        imageEl.src = `data:image/jpeg;base64,${image}`
+
+        console.log('data')
+      })
+    </script>
+  </body>
+</html>
